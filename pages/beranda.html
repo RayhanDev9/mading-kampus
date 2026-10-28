@@ -3,14 +3,37 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>Beranda - Mading Kampus</title>
 
     <link rel="stylesheet" href="../css/output.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      // Apply theme immediately before rendering
+      if (
+        localStorage.getItem("theme") === "dark" ||
+        (!("theme" in localStorage) &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    </script>
+    <style>
+      body {
+        font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      }
+    </style>
   </head>
-  <body class="min-h-screen font-sans bg-[#f5f7fa] text-gray-700">
+  <body class="min-h-screen font-sans bg-[#f8fafc] dark:bg-neutral-950 text-slate-800 dark:text-neutral-100 transition-colors duration-200">
+    <!-- HEADER -->
     <header
-      class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm"
+      class="bg-white/95 dark:bg-neutral-900/95 border-b border-slate-200 dark:border-neutral-800 sticky top-0 z-50 shadow-sm backdrop-blur-md transition-colors duration-200"
     >
       <div class="mx-auto px-4 sm:px-6 md:px-8">
         <div class="flex items-center justify-between h-16">
@@ -18,35 +41,36 @@
             <a
               href="../index.html"
               title="Kembali ke Landing Page"
-              class="text-xl md:text-2xl font-bold text-blue-700 tracking-tight"
+              class="text-xl md:text-2xl font-extrabold text-blue-700 dark:text-blue-400 tracking-tight"
               >MK</a
             >
 
             <nav
-              class="hidden md:flex items-center gap-x-6 lg:gap-x-8 text-sm md:text-base"
+              class="hidden md:flex items-center gap-x-6 lg:gap-x-8 text-sm md:text-base font-semibold"
             >
               <a
                 href="beranda.html"
-                class="font-medium text-blue-600 border-b-[3px] border-blue-600 pb-1 mt-1"
+                class="font-bold text-blue-600 dark:text-blue-400 border-b-[3px] border-blue-600 dark:border-blue-400 pb-1 mt-1"
                 >Beranda</a
               >
               <a
                 href="event/favorit.html"
-                class="text-slate-600 hover:text-slate-900 transition"
+                class="text-slate-600 hover:text-slate-900 dark:text-neutral-400 dark:hover:text-white transition"
                 >Favorit</a
               >
               <a
                 href="tools/mini-tools.html"
-                class="text-slate-600 hover:text-slate-900 transition"
+                class="text-slate-600 hover:text-slate-900 dark:text-neutral-400 dark:hover:text-white transition"
                 >Mini Tools</a
               >
             </nav>
           </div>
 
-          <div class="hidden md:flex items-center gap-x-5 text-sm">
+          <div class="hidden md:flex items-center gap-x-4 text-sm">
+            <!-- Search Bar -->
             <div class="relative">
               <svg
-                class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400"
+                class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 dark:text-neutral-500"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -62,13 +86,29 @@
               <input
                 type="text"
                 placeholder="Cari acara..."
-                class="w-48 lg:w-56 px-3 py-1.5 pl-10 border border-slate-300 rounded-lg placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition"
+                class="w-44 lg:w-56 px-3 py-1.5 pl-10 bg-white dark:bg-neutral-800 border border-slate-300 dark:border-neutral-700 rounded-lg text-slate-800 dark:text-white placeholder-slate-400 dark:placeholder-neutral-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition text-sm"
               />
             </div>
 
+            <!-- Dark Mode Toggle Button Desktop -->
+            <button
+              id="theme-toggle-desktop"
+              type="button"
+              class="p-2 rounded-xl text-slate-500 hover:text-slate-900 dark:text-neutral-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-neutral-800 transition"
+              aria-label="Toggle Dark Mode"
+            >
+              <svg id="icon-sun" class="w-5 h-5 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+              </svg>
+              <svg id="icon-moon" class="w-5 h-5 block dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+              </svg>
+            </button>
+
+            <!-- Tombol Unggah -->
             <a href="event/uploud.html" class="btn-unggah" id="btn-unggah-desktop">
               <button
-                class="flex items-center gap-x-1.5 px-4 py-1.5 bg-blue-600 text-white rounded-lg font-semibold uppercase hover:bg-blue-700 transition"
+                class="flex items-center gap-x-1.5 px-4 py-1.5 bg-blue-600 text-white rounded-lg font-semibold uppercase hover:bg-blue-700 active:bg-blue-800 transition shadow-sm"
               >
                 <svg
                   class="w-4 h-4"
@@ -88,7 +128,8 @@
               </button>
             </a>
 
-            <div class="border-slate-300 pl-5" id="auth-nav-desktop">
+            <!-- Auth Status Navigation -->
+            <div class="border-l border-slate-200 dark:border-neutral-800 pl-4" id="auth-nav-desktop">
               <a
                 href="auth/login.html"
                 id="link-auth-desktop"
@@ -98,10 +139,26 @@
             </div>
           </div>
 
-          <div class="flex md:hidden items-center couser">
+          <!-- Mobile Toggle & Menu Buttons -->
+          <div class="flex md:hidden items-center gap-2">
+            <button
+              id="theme-toggle-mobile"
+              type="button"
+              class="p-2 rounded-xl text-slate-500 hover:text-slate-900 dark:text-neutral-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-neutral-800 transition"
+              aria-label="Toggle Dark Mode"
+            >
+              <svg class="w-5 h-5 hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+              </svg>
+              <svg class="w-5 h-5 block dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+              </svg>
+            </button>
+
             <button
               id="mobile-menu-btn"
-              class="text-slate-600 hover:text-slate-900 focus:outline-none p-2"
+              class="text-slate-600 hover:text-slate-900 dark:text-neutral-400 dark:hover:text-white focus:outline-none p-2"
+              aria-label="Menu"
             >
               <svg
                 class="w-7 h-7"
@@ -121,28 +178,29 @@
         </div>
       </div>
 
+      <!-- Mobile Dropdown Menu -->
       <div
         id="mobile-menu"
-        class="md:hidden border-t border-slate-200 bg-white px-4 pt-4 pb-6 space-y-4 shadow-lg absolute w-full left-0 z-40 transform transition-all duration-300 ease-out opacity-0 pointer-events-none -translate-y-4"
+        class="md:hidden border-t border-slate-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 px-4 pt-4 pb-6 space-y-4 shadow-lg absolute w-full left-0 z-40 transform transition-all duration-300 ease-out opacity-0 pointer-events-none -translate-y-4"
       >
-        <nav class="flex flex-col gap-y-4 text-base">
-          <a href="beranda.html" class="font-medium text-blue-600">Beranda</a>
+        <nav class="flex flex-col gap-y-3 font-semibold text-base">
+          <a href="beranda.html" class="text-blue-600 dark:text-blue-400">Beranda</a>
           <a
             href="event/favorit.html"
-            class="text-slate-600 hover:text-slate-900 transition"
+            class="text-slate-600 hover:text-slate-900 dark:text-neutral-300 dark:hover:text-white transition"
             >Favorit</a
           >
           <a
             href="tools/mini-tools.html"
-            class="text-slate-600 hover:text-slate-900 transition"
+            class="text-slate-600 hover:text-slate-900 dark:text-neutral-300 dark:hover:text-white transition"
             >Mini Tools</a
           >
         </nav>
-        <div class="pt-4 border-t border-slate-100 flex flex-col gap-y-4">
+        <div class="pt-4 border-t border-slate-100 dark:border-neutral-800 flex flex-col gap-y-3">
           <input
             type="text"
             placeholder="Cari acara..."
-            class="w-full px-4 py-2 border border-slate-300 rounded-lg placeholder-slate-400 focus:outline-none focus:border-blue-500 transition text-sm"
+            class="w-full px-4 py-2 bg-white dark:bg-neutral-800 border border-slate-300 dark:border-neutral-700 rounded-lg text-slate-800 dark:text-white placeholder-slate-400 dark:placeholder-neutral-500 focus:outline-none focus:border-blue-500 transition text-sm"
           />
           <a href="event/uploud.html" class="btn-unggah" id="btn-unggah-mobile">
             <button
@@ -164,62 +222,63 @@
       </div>
     </header>
 
-    <main class="mx-auto px-6">
-      <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <!-- MAIN CONTENT -->
+    <main class="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl py-6">
+      <!-- Section Filters -->
+      <section class="mb-8">
         <div class="flex flex-col gap-y-6">
+          <!-- Kategori Tabs -->
           <div
             id="tab-group"
-            class="lg:inline-flex bg-slate-100 p-1 rounded-lg border border-slate-200 lg:self-start flex flex-nowrap overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+            class="inline-flex bg-slate-100 dark:bg-neutral-900 p-1.5 rounded-2xl border border-slate-200 dark:border-neutral-800 self-start max-w-full overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] gap-1 transition-colors"
           >
             <button
-              class="px-8 py-2 rounded-md text-sm transition-all duration-200 focus:outline-none bg-white text-blue-700 font-bold shadow-sm border border-slate-200"
+              class="px-6 sm:px-8 py-2 rounded-xl text-sm transition-all duration-200 focus:outline-none bg-white dark:bg-neutral-800 text-blue-700 dark:text-blue-400 font-bold shadow-sm border border-slate-200 dark:border-neutral-700"
             >
               Acara
             </button>
             <button
-              class="px-8 py-2 rounded-md text-sm transition-all duration-200 focus:outline-none text-slate-500 font-medium border border-transparent hover:text-slate-900 hover:bg-slate-200/50"
+              class="px-6 sm:px-8 py-2 rounded-xl text-sm transition-all duration-200 focus:outline-none text-slate-500 dark:text-neutral-400 font-medium border border-transparent hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/50 dark:hover:bg-neutral-800/50"
             >
               UMKM
             </button>
             <button
-              class="px-8 py-2 rounded-md text-sm transition-all duration-200 focus:outline-none text-slate-500 font-medium border border-transparent hover:text-slate-900 hover:bg-slate-200/50"
+              class="px-6 sm:px-8 py-2 rounded-xl text-sm transition-all duration-200 focus:outline-none text-slate-500 dark:text-neutral-400 font-medium border border-transparent hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/50 dark:hover:bg-neutral-800/50"
             >
               UKO
             </button>
             <button
-              class="px-8 py-2 rounded-md text-sm transition-all duration-200 focus:outline-none text-slate-500 font-medium border border-transparent hover:text-slate-900 hover:bg-slate-200/50"
+              class="px-6 sm:px-8 py-2 rounded-xl text-sm transition-all duration-200 focus:outline-none text-slate-500 dark:text-neutral-400 font-medium border border-transparent hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/50 dark:hover:bg-neutral-800/50"
             >
               HIMA
             </button>
           </div>
 
-          <div class="flex flex-col gap-y-5">
-            <div
-              id="time-group"
-              class="flex items-center gap-3 flex-nowrap overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] pb-2"
+          <!-- Waktu Filter Pills -->
+          <div class="flex items-center gap-2 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] pb-1">
+            <span
+              class="text-xs font-bold text-slate-400 dark:text-neutral-500 uppercase tracking-wider mr-2 shrink-0"
+              >Waktu</span
             >
-              <span
-                class="text-xs font-bold text-slate-400 uppercase tracking-wider mr-2"
-                >Waktu</span
-              >
 
+            <div id="time-group" class="flex items-center gap-2 shrink-0">
               <button
-                class="whitespace-nowrap px-5 py-2 rounded-full text-sm transition-all duration-200 shadow-sm border bg-blue-50 text-blue-700 border-blue-200 font-semibold hover:bg-blue-100"
+                class="whitespace-nowrap px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm transition-all duration-200 shadow-sm border bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-400 border-blue-200 dark:border-blue-900 font-semibold"
               >
                 Semua Acara
               </button>
               <button
-                class="whitespace-nowrap px-5 py-2 rounded-full text-sm transition-all duration-200 shadow-sm border bg-white text-slate-600 border-slate-200 font-medium hover:bg-slate-50 hover:border-slate-300"
+                class="whitespace-nowrap px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm transition-all duration-200 shadow-sm border bg-white dark:bg-neutral-900 text-slate-600 dark:text-neutral-400 border-slate-200 dark:border-neutral-800 font-medium hover:bg-slate-50 dark:hover:bg-neutral-800 hover:border-slate-300 dark:hover:border-neutral-700"
               >
                 Hari Ini
               </button>
               <button
-                class="whitespace-nowrap px-5 py-2 rounded-full text-sm transition-all duration-200 shadow-sm border bg-white text-slate-600 border-slate-200 font-medium hover:bg-slate-50 hover:border-slate-300"
+                class="whitespace-nowrap px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm transition-all duration-200 shadow-sm border bg-white dark:bg-neutral-900 text-slate-600 dark:text-neutral-400 border-slate-200 dark:border-neutral-800 font-medium hover:bg-slate-50 dark:hover:bg-neutral-800 hover:border-slate-300 dark:hover:border-neutral-700"
               >
                 Minggu Ini
               </button>
               <button
-                class="whitespace-nowrap px-5 py-2 rounded-full text-sm transition-all duration-200 shadow-sm border bg-white text-slate-600 border-slate-200 font-medium hover:bg-slate-50 hover:border-slate-300"
+                class="whitespace-nowrap px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm transition-all duration-200 shadow-sm border bg-white dark:bg-neutral-900 text-slate-600 dark:text-neutral-400 border-slate-200 dark:border-neutral-800 font-medium hover:bg-slate-50 dark:hover:bg-neutral-800 hover:border-slate-300 dark:hover:border-neutral-700"
               >
                 Acara Mendatang
               </button>
@@ -228,53 +287,61 @@
         </div>
       </section>
 
-     
+      <!-- Grid Cards Acara -->
       <section
         id="tempat-poster"
-        class="max-w-7xl mx-auto xs:px-4 sm:px-6 lg:px-8 py-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 min-h-[300px]"
       >
         <div
-          class="col-span-full text-center py-20 text-gray-500 animate-pulse mx-auto"
+          class="col-span-full text-center py-20 text-slate-400 dark:text-neutral-500 animate-pulse mx-auto"
         >
           Menyambungkan ke Server Backend...
         </div>
       </section>
     </main>
 
-    <footer class="mt-20 bg-white border-t border-slate-200">
+    <!-- FOOTER -->
+    <footer class="mt-20 bg-white dark:bg-neutral-900 border-t border-slate-200 dark:border-neutral-800 transition-colors duration-200">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-8">
         <div
           class="flex flex-col md:flex-row justify-between items-center gap-y-6 text-center md:text-left"
         >
           <div>
-            <span class="text-2xl font-bold text-blue-700 tracking-tight"
+            <span class="text-2xl font-bold text-blue-700 dark:text-blue-400 tracking-tight"
               >Mading Kampus</span
             >
-            <p class="text-slate-500 text-sm mt-2">
-              Mading digital untuk berbagi acara & UMKM mahasiswa.
+            <p class="text-slate-500 dark:text-neutral-400 text-sm mt-2">
+              Mading digital untuk berbagi acara &amp; karya UMKM mahasiswa.
             </p>
           </div>
 
           <nav
-            class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-medium text-slate-600"
+            class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-semibold text-slate-600 dark:text-neutral-400"
           >
-            <a href="#" class="hover:text-blue-600 transition">Tentang Kami</a>
-            <a href="#" class="hover:text-blue-600 transition"
-              >Hubungi Panitia</a
-            >
-            <a href="#" class="hover:text-blue-600 transition"
-              >Panduan Unggah</a
-            >
+            <a href="../index.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Landing Page</a>
+            <a href="tools/mini-tools.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Mini Tools</a>
+            <a href="event/favorit.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Favorit</a>
+            <a href="auth/login.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Login</a>
           </nav>
         </div>
 
-        <hr class="border-slate-200 my-8" />
+        <hr class="border-slate-200 dark:border-neutral-800 my-8" />
 
-        <div class="text-center text-sm text-slate-400">
-          &copy; 2026 KampusKonek. Semua hak cipta dilindungi.
+        <div class="text-center text-sm text-slate-400 dark:text-neutral-500">
+          &copy; 2026 Mading Kampus. Semua hak cipta dilindungi.
         </div>
       </div>
     </footer>
+
+    <!-- Theme Toggle Handler -->
+    <script>
+      function toggleTheme() {
+        const isDark = document.documentElement.classList.toggle("dark");
+        localStorage.setItem("theme", isDark ? "dark" : "light");
+      }
+      document.getElementById("theme-toggle-desktop")?.addEventListener("click", toggleTheme);
+      document.getElementById("theme-toggle-mobile")?.addEventListener("click", toggleTheme);
+    </script>
 
     <script src="../js/api.js"></script>
     <script type="module" src="../js/home.js"></script>

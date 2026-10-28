@@ -172,20 +172,20 @@ function renderCards(events) {
         : "12:00";
 
       return `
-      <div data-id="${acara.id}" class="card-acara w-[100%] xs:w-80 bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md hover:border-slate-300 transition duration-300 flex flex-col cursor-pointer group max-sm:mx-auto">
-          <div class="h-48 bg-slate-100 w-full relative overflow-hidden">
-              <div class="absolute inset-0 flex items-center justify-center text-slate-400 text-sm">
-                  <img src="${imageUrl}" alt="${acara.judul}" onerror="this.src='https://via.placeholder.com/800x450?text=Gambar+Tidak+Tersedia'" class="w-full h-full object-cover opacity-90">
+      <div data-id="${acara.id}" class="card-acara w-full bg-white dark:bg-neutral-900 border border-slate-200 dark:border-neutral-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:border-slate-300 dark:hover:border-neutral-700 transition duration-300 flex flex-col cursor-pointer group">
+          <div class="h-48 bg-slate-100 dark:bg-neutral-800 w-full relative overflow-hidden">
+              <div class="absolute inset-0 flex items-center justify-center text-slate-400 dark:text-neutral-500 text-sm">
+                  <img src="${imageUrl}" alt="${acara.judul}" onerror="this.src='https://via.placeholder.com/800x450?text=Gambar+Tidak+Tersedia'" class="w-full h-full object-cover opacity-90 group-hover:scale-105 transition duration-300">
               </div>
-              <div class="absolute top-4 right-4 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded shadow-sm uppercase tracking-wider">
+              <div class="absolute top-4 right-4 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded shadow-sm uppercase tracking-wider">
                   ${acara.kategori || "ACARA"}
               </div>
           </div>
 
           <div class="p-5 flex flex-col flex-grow">
-              <div class="flex items-center justify-between gap-x-2 text-sm text-blue-600 font-semibold mb-3">
-                  <span class="${acara.harga == 0 ? "text-gray-500" : "text-blue-600 font-bold"}">${hargaTeks}</span>
-                  <div class="flex items-center gap-x-2 text-blue-600">
+              <div class="flex items-center justify-between gap-x-2 text-sm text-blue-600 dark:text-blue-400 font-semibold mb-3">
+                  <span class="${acara.harga == 0 ? "text-slate-500 dark:text-neutral-400 font-medium" : "text-blue-600 dark:text-blue-400 font-bold"}">${hargaTeks}</span>
+                  <div class="flex items-center gap-x-2 text-blue-600 dark:text-blue-400">
                       <svg class="w-4 h-4 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
                       </svg>
@@ -193,17 +193,17 @@ function renderCards(events) {
                   </div>
               </div>
               
-              <h3 class="text-lg font-bold text-slate-900 leading-snug line-clamp-2 mb-3">
+              <h3 class="text-lg font-bold text-slate-900 dark:text-white leading-snug line-clamp-2 mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition">
                   ${acara.judul}
               </h3>
               
-              <div class="mt-auto flex flex-col gap-2">
-                  <div class="flex items-center gap-x-2 text-sm text-slate-500 font-medium pt-2 border-t border-slate-50">
+              <div class="mt-auto flex flex-col gap-2 pt-3 border-t border-slate-100 dark:border-neutral-800">
+                  <div class="flex items-center gap-x-2 text-sm text-slate-500 dark:text-neutral-400 font-medium">
                       <span class="text-base">⏰</span>
                       <span>${jamAcara} WIB</span>
                   </div>
                   
-                  <div class="flex items-start gap-x-2 text-sm text-slate-500 pt-2">
+                  <div class="flex items-start gap-x-2 text-sm text-slate-500 dark:text-neutral-400 pt-1">
                       <svg class="w-4 h-4 shrink-0 mt-0.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                           <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
@@ -231,33 +231,46 @@ document.getElementById("tempat-poster").addEventListener("click", (e) => {
 const eventFilterLogic = () => {
   const tabActive = [
     "bg-white",
+    "dark:bg-neutral-800",
     "text-blue-700",
+    "dark:text-blue-400",
     "font-bold",
     "shadow-sm",
     "border-slate-200",
+    "dark:border-neutral-700",
   ];
   const tabInactive = [
     "text-slate-500",
+    "dark:text-neutral-400",
     "font-medium",
     "border-transparent",
     "hover:text-slate-900",
+    "dark:hover:text-white",
     "hover:bg-slate-200/50",
+    "dark:hover:bg-neutral-800/50",
   ];
 
   const timeActive = [
     "bg-blue-50",
+    "dark:bg-blue-950/40",
     "text-blue-700",
+    "dark:text-blue-400",
     "border-blue-200",
+    "dark:border-blue-900",
     "font-semibold",
-    "hover:bg-blue-100",
   ];
   const timeInactive = [
     "bg-white",
+    "dark:bg-neutral-900",
     "text-slate-600",
+    "dark:text-neutral-400",
     "border-slate-200",
+    "dark:border-neutral-800",
     "font-medium",
     "hover:bg-slate-50",
+    "dark:hover:bg-neutral-800",
     "hover:border-slate-300",
+    "dark:hover:border-neutral-700",
   ];
 
   function initFilterGroup(
