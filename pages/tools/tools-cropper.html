@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Cropper</title>
+    <link rel="stylesheet" href="../../css/output.css" />
+
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+    <body
+    class="m-0 font-sans bg-[#f8fafc] text-[#1e293b] flex flex-col min-h-screen"
+    style="
+      background-image: linear-gradient(#e2e8f0 1px, transparent 1px),
+        linear-gradient(90deg, #e2e8f0 1px, transparent 1px);
+      background-size: 40px 40px;
+    "
+  >
+   <header
+      class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm"
+    >
+      <div
+        class=" mx-auto px-6 md:px-16 lg:px-24 xl:px-32 h-16 flex items-center justify-between"
+      >
+        <a
+          href="mini-tools.html"
+          class="text-xl font-bold text-blue-700 tracking-tight flex items-center gap-2  "
+        >
+          <button
+            class="bg-[#2664ff] text-white px-3 py-2 md:px- md:py-2 text-xs md:text-sm  font-bold rounded-lg inline-flex justify-center items-center gap-2  hover:bg-[#1a4dbd] w-full sm:w-auto"
+          >
+            <svg
+              class="h-4 W-4"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="3"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="20" y1="12" x2="4" y2="12"></line>
+              <polyline points="10 18 4 12 10 6"></polyline>
+            </svg>
+            BACK
+          </button>
+        </a>
+        <span class="font-semibold text-slate-500 uppercase text-sm text-right"
+          >Mini Tools
+        </span>
+      </div>
+    </header>
+    
+    <div class="flex items-center gap-[15px] text-[22px] font-semibold mx-auto my-8">
+    <div class="w-[36px] h-[36px] bg-[#f97316] rounded-full text-white flex items-center justify-center font-bold text-[18px]">
+      +
+    </div>
+    <h1 class="m-0 text-inherit font-inherit leading-tight">
+      Image Cropper <span class="text-[#22c55e]">🍃</span>
+      <span class="text-[12px] mt-1 text-[#64748b] flex items-center gap-[5px] font-normal before:content-[''] before:inline-block before:w-[8px] before:h-[8px] before:bg-[#22c55e] before:rounded-full">
+        On-Device
+      </span>
+    </h1>
+  </div>
+
+    <div class="flex flex-wrap flex-1 px-[30px] py-[20px] mx-auto gap-[20px] overflow-hidden max-[888px]:flex-col">
+      <div class="w-[320px] max-[888px]:w-full flex flex-col gap-[20px] overflow-y-auto">
+        <div class="bg-white border border-[#e2e8f0] rounded-[12px] p-[20px] shadow-[0_1px_3px_rgba(0,0,0,0.05)]">
+          <div class="flex justify-between items-center mb-[15px]">
+            <div class="flex items-center justify-between gap-[10px] font-semibold text-[14px] text-[#1e293b]">🖼️ Source Image</div>
+            <button class="bg-transparent border-none text-[#64748b] cursor-pointer text-[14px] flex items-center gap-[5px] font-semibold self-start" id="btn-reset">↺ Reset</button>
+          </div>
+
+          <div class="border-2 border-dashed border-[#e2e8f0] rounded-[8px] p-[20px] text-center cursor-pointer transition-all duration-200 bg-[#f8fafc] relative hover:border-[#f97316]">
+            <input
+              type="file"
+              id="image-input"
+              accept="image/png, image/jpeg, image/jpg, image/webp"
+              class="absolute w-full h-full top-0 left-0 opacity-0 cursor-pointer"
+            />
+            <div class="bg-white border border-[#e2e8f0] px-[16px] py-[8px] rounded-[6px] font-semibold text-[#f97316] mb-[10px] inline-flex items-center gap-[8px]">☁️ Upload Image</div>
+            <div class="text-[11px] text-[#64748b]">
+              Drag & drop or click to browse files.
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white border border-[#e2e8f0] rounded-[12px] p-[20px] shadow-[0_1px_3px_rgba(0,0,0,0.05)]">
+          <div class="flex items-center justify-between gap-[10px] font-semibold mb-[15px] text-[14px] text-[#1e293b]">
+            <span>⚙️ Settings</span>
+            <button class="bg-[#f97316] hover:bg-[#ea580c] text-white border-none px-[16px] py-[8px] rounded-[6px] font-semibold cursor-pointer flex justify-center items-center gap-[8px]" id="btn-download">📥 DOWNLOAD</button>
+          </div>
+
+          <div class="flex items-center justify-between gap-[10px] font-semibold mb-[15px] text-[14px] mt-[20px] text-[#64748b]">
+            ♮ ASPECT RATIO
+          </div>
+          <div class="grid grid-cols-3 gap-[10px]">
+            <div class="bg-white border border-[#e2e8f0] py-[15px] px-[5px] rounded-[8px] flex flex-col items-center justify-center gap-[5px] cursor-pointer text-[#64748b] text-[12px] font-semibold transition duration-200 hover:border-[#f97316] [&.active]:border-[#f97316] [&.active]:text-[#f97316] active" data-ratio="NaN">
+              <div class="border border-current rounded-[2px] w-[20px] h-[16px] border-dashed"></div>
+              FREE
+            </div>
+            <div class="bg-white border border-[#e2e8f0] py-[15px] px-[5px] rounded-[8px] flex flex-col items-center justify-center gap-[5px] cursor-pointer text-[#64748b] text-[12px] font-semibold transition duration-200 hover:border-[#f97316] [&.active]:border-[#f97316] [&.active]:text-[#f97316]" data-ratio="1">
+              <div class="border border-current rounded-[2px] w-[16px] h-[16px]"></div>
+              1:1
+            </div>
+            <div class="bg-white border border-[#e2e8f0] py-[15px] px-[5px] rounded-[8px] flex flex-col items-center justify-center gap-[5px] cursor-pointer text-[#64748b] text-[12px] font-semibold transition duration-200 hover:border-[#f97316] [&.active]:border-[#f97316] [&.active]:text-[#f97316]" data-ratio="0.75">
+              <div class="border border-current rounded-[2px] w-[14px] h-[18px]"></div>
+              3:4
+            </div>
+            <div class="bg-white border border-[#e2e8f0] py-[15px] px-[5px] rounded-[8px] flex flex-col items-center justify-center gap-[5px] cursor-pointer text-[#64748b] text-[12px] font-semibold transition duration-200 hover:border-[#f97316] [&.active]:border-[#f97316] [&.active]:text-[#f97316]" data-ratio="1.3333">
+              <div class="border border-current rounded-[2px] w-[20px] h-[15px]"></div>
+              4:3
+            </div>
+            <div class="bg-white border border-[#e2e8f0] py-[15px] px-[5px] rounded-[8px] flex flex-col items-center justify-center gap-[5px] cursor-pointer text-[#64748b] text-[12px] font-semibold transition duration-200 hover:border-[#f97316] [&.active]:border-[#f97316] [&.active]:text-[#f97316]" data-ratio="1.7777">
+              <div class="border border-current rounded-[2px] w-[24px] h-[14px]"></div>
+              16:9
+            </div>
+            <div class="bg-white border border-[#e2e8f0] py-[15px] px-[5px] rounded-[8px] flex flex-col items-center justify-center gap-[5px] cursor-pointer text-[#64748b] text-[12px] font-semibold transition duration-200 hover:border-[#f97316] [&.active]:border-[#f97316] [&.active]:text-[#f97316]" data-ratio="0.5625">
+              <div class="border border-current rounded-[2px] w-[12px] h-[20px]"></div>
+              9:16
+            </div>
+          </div>
+          <div class="text-[11px] text-[#64748b] mt-[15px] text-center">
+            Drag the edges of the box to resize the crop area freely.
+          </div>
+        </div>
+      </div>
+
+      <div class="flex-1 bg-white border border-[#e2e8f0] rounded-[12px] flex flex-col overflow-hidden">
+        <div class="px-[20px] py-[15px] font-semibold border-b border-[#e2e8f0] flex items-center gap-[10px]">
+          🔲 Cropper Workspace
+        </div>
+        <div 
+          class="flex-1 flex justify-center items-center relative overflow-hidden" 
+          id="workspace-container"
+          style="
+            background-image: linear-gradient(45deg, #e2e8f0 25%, transparent 25%),
+              linear-gradient(-45deg, #e2e8f0 25%, transparent 25%),
+              linear-gradient(45deg, transparent 75%, #e2e8f0 75%),
+              linear-gradient(-45deg, transparent 75%, #e2e8f0 75%);
+            background-size: 20px 20px;
+            background-position:
+              0 0,
+              0 10px,
+              10px -10px,
+              -10px 0px;
+          "
+        >
+          <div class="text-[#64748b] text-center font-semibold" id="no-image-text">
+            <div class="text-[40px] text-[#cbd5e1] mb-[10px]">
+              🖼️
+            </div>
+            No image selected.
+          </div>
+          <img id="cropper-image" src="" alt="Picture to crop" class="max-w-full max-h-full hidden" />
+        </div>
+      </div>
+    </div>
+    
+
+
+  
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+
+    <script>
+      const API_URL =
+        "https://slab-silenced-riot.ngrok-free.dev/api/crop-image";
+
+      let cropper = null;
+      const imageInput = document.getElementById("image-input");
+      const cropperImage = document.getElementById("cropper-image");
+      const noImageText = document.getElementById("no-image-text");
+      const btnReset = document.getElementById("btn-reset");
+      const btnDownload = document.getElementById("btn-download");
+      const ratioBtns = document.querySelectorAll(".ratio-btn");
+
+      imageInput.addEventListener("change", function (e) {
+        const files = e.target.files;
+        if (files && files.length > 0) {
+          const file = files[0];
+          const url = URL.createObjectURL(file);
+
+          noImageText.style.display = "none";
+          cropperImage.src = url;
+          cropperImage.style.display = "block";
+
+          if (cropper) {
+            cropper.destroy();
+          }
+
+          cropper = new Cropper(cropperImage, {
+            aspectRatio: NaN, 
+            viewMode: 1, 
+            background: false, 
+          });
+
+          ratioBtns.forEach((b) => b.classList.remove("active"));
+          ratioBtns[0].classList.add("active");
+        }
+      });
+
+      ratioBtns.forEach((btn) => {
+        btn.addEventListener("click", function () {
+          if (!cropper) return alert("Silakan upload gambar terlebih dahulu!");
+
+          ratioBtns.forEach((b) => b.classList.remove("active"));
+          this.classList.add("active");
+
+          const ratioValue = parseFloat(this.getAttribute("data-ratio"));
+          cropper.setAspectRatio(ratioValue);
+        });
+      });
+
+      btnReset.addEventListener("click", () => {
+        if (cropper) {
+          cropper.destroy();
+          cropper = null;
+        }
+        imageInput.value = "";
+        cropperImage.src = "";
+        cropperImage.style.display = "none";
+        noImageText.style.display = "block";
+        ratioBtns.forEach((b) => b.classList.remove("active"));
+        ratioBtns[0].classList.add("active");
+      });
+
+      btnDownload.addEventListener("click", async () => {
+        if (!cropper) return alert("Tidak ada gambar untuk di-crop!");
+
+        btnDownload.innerText = "⏳ PROSES...";
+
+        const canvas = cropper.getCroppedCanvas();
+        const base64Image = canvas.toDataURL("image/png"); 
+
+        const link = document.createElement("a");
+        link.download = "cropped-image.png";
+        link.href = base64Image;
+        link.click();
+
+        try {
+          const response = await fetch(API_URL, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              "ngrok-skip-browser-warning": "true",
+            },
+            body: JSON.stringify({
+              cropped_image: base64Image,
+            }),
+          });
+
+          const result = await response.json();
+
+          if (response.ok) {
+            console.log("Sukses disimpan di Laravel!", result);
+          } else {
+            alert("Error dari Server: " + result.message);
+          }
+        } catch (error) {
+          console.error("API Error:", error);
+          alert("Gagal menghubungi API Laravel.");
+        } finally {
+          btnDownload.innerText = "📥 DOWNLOAD";
+        }
+      });
+    </script>
+  </body>
+</html>

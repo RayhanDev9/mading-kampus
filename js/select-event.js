@@ -1,9 +1,8 @@
 const API_BASE_URL = "https://slab-silenced-riot.ngrok-free.dev/api/events";
-const STORAGE_BASE_URL = "https://slab-silenced-riot.ngrok-free.dev/storage/"; 
+const STORAGE_BASE_URL = "https://slab-silenced-riot.ngrok-free.dev/storage/";
 
 const urlParams = new URLSearchParams(window.location.search);
 const idAcara = urlParams.get("id");
-
 
 const header = () => {
   const initMobileMenu = () => {
@@ -42,13 +41,12 @@ const header = () => {
 };
 header();
 
-
 window.toggleBookmarkEvent = async function () {
   const userAktif = JSON.parse(localStorage.getItem("user_mading"));
 
   if (!userAktif) {
     alert("Silakan login terlebih dahulu untuk menyimpan acara.");
-    window.location.href = "login.html";
+    window.location.href = "../auth/login.html";
     return;
   }
 
@@ -57,9 +55,25 @@ window.toggleBookmarkEvent = async function () {
 
   // 1. Ubah tampilan tombol langsung (Optimistic UI)
   const isBookmarked = text.innerText === "Tersimpan";
+  document.getElementById("btn-bookmark").addEventListener("click", () => {
+    // 1. Balikkan nilainya (Toggle)
+    // Kalau awalnya false jadi true, kalau true jadi false
+    dataAsli.is_bookmarked = !dataAsli.is_bookmarked;
 
+    // 2. Lakukan aksi berdasarkan status terbarunya
+    if (dataAsli.is_bookmarked) {
+      console.info("Bookmark berhasil ditambahkan!");
+      // TODO: Ubah tampilan/warna icon tombol di sini agar terlihat aktif
+    } else {
+      console.info("Bookmark dihapus.");
+      // TODO: Ubah tampilan/warna icon tombol di sini agar terlihat non-aktif
+    }
+  });
+
+  console.info(isBookmarked);
   if (isBookmarked) {
     text.innerText = "Simpan";
+
     btn.classList.replace("bg-yellow-50", "bg-white");
     btn.classList.replace("text-yellow-600", "text-gray-500");
     btn.classList.replace("border-yellow-400", "border-gray-300");
@@ -90,6 +104,21 @@ window.toggleBookmarkEvent = async function () {
   }
 };
 
+const bookmark = (dataAsli) => {
+  const btn = document.getElementById("btn-bookmark");
+  const svg = btn.querySelector("svg");
+  btn.addEventListener("click", () => {
+    dataAsli.is_bookmarked = !dataAsli.is_bookmarked;
+
+    if (dataAsli.is_bookmarked) {
+      svg.classList.add("fill-blue-700");
+    } else {
+      console.info("Bookmark dihapus.");
+      // TODO: Ubah tampilan/warna icon tombol di sini agar terlihat non-aktif
+      svg.classList.remove("fill-blue-700");
+    }
+  });
+};
 
 const initEventDetail = () => {
   function fungsiCreateEvents(data) {
@@ -99,6 +128,7 @@ const initEventDetail = () => {
     if (imageUrl && !imageUrl.startsWith("http")) {
       imageUrl = STORAGE_BASE_URL + imageUrl;
     }
+    console.info(data.is_bookmarked)
 
     const hargaFormat =
       !data.harga || data.harga == 0
@@ -136,7 +166,7 @@ const initEventDetail = () => {
                 stroke-width="2" 
                 stroke-linecap="round" 
                 stroke-linejoin="round" 
-                class="w-5 h-5 text-blue-700"
+                class="w-5 h-5 text-blue-700 "
               >
                 <path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"></path>
               </svg>
@@ -198,7 +228,7 @@ const initEventDetail = () => {
               stroke-width="2" 
               stroke-linecap="round" 
               stroke-linejoin="round" 
-              class="w-5 h-5 text-blue-700"
+              class="w-5 h-5 text-blue-700 ${data.is_bookmarked ? 'fill-blue-700 ': ""}"
             >
               <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
               <circle cx="12" cy="10" r="3"></circle>
@@ -238,12 +268,14 @@ const initEventDetail = () => {
         `;
 
     container.innerHTML = html;
+
+    bookmark(data);
   }
 
   function renderBreadcrumb(data) {
     const container = document.getElementById("breadcrumb");
     container.innerHTML = `
-        <a href="/" class="hover:text-blue-600">Beranda</a> <span class="mx-1">></span> 
+        <a href="../beranda.html" class="hover:text-blue-600">Beranda</a> <span class="mx-1">></span> 
         <span class="hover:text-blue-600 capitalize cursor-pointer">${data.kategori}</span> <span class="mx-1">></span>
         <span class="font-semibold text-gray-800 capitalize">${data.judul}</span>
     `;
@@ -267,17 +299,13 @@ const initEventDetail = () => {
       const result = await response.json();
       const dataAsli = result.data !== undefined ? result.data : result;
 
-      if (result.is_bookmarked !== undefined) {
-        dataAsli.is_bookmarked = result.is_bookmarked;
-      }
+      dataAsli.is_bookmarked = false;
 
       fungsiCreateEvents(dataAsli);
       renderBreadcrumb(dataAsli);
-      document
-        .getElementById("dafta-event")
-        .addEventListener("click", (e) => {
-            window.location.href = `checkout.html?id=${dataAsli.id}`;
-        });
+      document.getElementById("dafta-event").addEventListener("click", (e) => {
+        window.location.href = `checkout.html?id=${dataAsli.id}`;
+      });
     } catch (error) {
       console.error("Error Detail Acara:", error);
       document.getElementById("container-slect-event").innerHTML =
@@ -292,8 +320,6 @@ const initEventDetail = () => {
       `<div class="p-6 text-center text-gray-500 bg-white rounded-lg shadow border">Pilih event terlebih dahulu dari halaman utama.</div>`;
   }
 };
-
-
 
 window.toggleReply = function (commentId) {
   const form = document.getElementById(`reply-form-${commentId}`);
@@ -310,7 +336,7 @@ window.submitReply = async function (event, commentId) {
   const userAktif = JSON.parse(localStorage.getItem("user_mading"));
   if (!userAktif) {
     alert("Silakan login terlebih dahulu untuk membalas komentar.");
-    window.location.href = "login.html";
+    window.location.href = "../auth/login.html";
     return;
   }
 
@@ -337,8 +363,8 @@ window.submitReply = async function (event, commentId) {
 
     if (response.ok) {
       input.value = "";
-      window.toggleReply(commentId); 
-      window.refreshComments(); 
+      window.toggleReply(commentId);
+      window.refreshComments();
     } else {
       alert("Gagal mengirim balasan.");
     }
@@ -449,7 +475,7 @@ const initChatSystem = () => {
     const userAktif = JSON.parse(localStorage.getItem("user_mading"));
     if (!userAktif) {
       alert("Silakan login terlebih dahulu untuk berkomentar.");
-      window.location.href = "login.html";
+      window.location.href = "../auth/login.html";
       return;
     }
 

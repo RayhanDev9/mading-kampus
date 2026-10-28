@@ -1,6 +1,5 @@
-const API_URL = "https://slab-silenced-riot.ngrok-free.dev/api/events";
-const API_ROLE_URL = "https://slab-silenced-riot.ngrok-free.dev/api/login";
-const STORAGE_URL = "https://slab-silenced-riot.ngrok-free.dev/storage/";
+const API_URL = typeof API_BASE_URL !== "undefined" ? `${API_BASE_URL}/api/events` : "https://slab-silenced-riot.ngrok-free.dev/api/events";
+const STORAGE_URL = typeof STORAGE_BASE_URL !== "undefined" ? STORAGE_BASE_URL : "https://slab-silenced-riot.ngrok-free.dev/storage/";
 
 let allEvents = [];
 let currentFilterKat = "Semua";
@@ -25,17 +24,53 @@ const header = () => {
   initMobileMenu();
 
   const checkUserRole = () => {
-    const userAktif = JSON.parse(localStorage.getItem("user_mading"));
+    const userAktif = JSON.parse(localStorage.getItem("user_mading") || "null");
 
     const btnDesktop = document.getElementById("btn-unggah-desktop");
     const btnMobile = document.getElementById("btn-unggah-mobile");
+    const linkAuthDesktop = document.getElementById("link-auth-desktop");
+    const linkAuthMobile = document.getElementById("link-auth-mobile");
 
-    if (!userAktif || userAktif.role !== "admin") {
+    if (!userAktif) {
       if (btnDesktop) btnDesktop.classList.add("hidden");
       if (btnMobile) btnMobile.classList.add("hidden");
+      if (linkAuthDesktop) {
+        linkAuthDesktop.innerText = "Masuk";
+        linkAuthDesktop.href = "auth/login.html";
+        linkAuthDesktop.className = "text-blue-600 hover:text-blue-800 font-semibold transition text-base";
+      }
+      if (linkAuthMobile) {
+        linkAuthMobile.innerText = "Masuk";
+        linkAuthMobile.href = "auth/login.html";
+        linkAuthMobile.className = "text-blue-600 hover:text-blue-800 font-semibold transition text-base";
+      }
     } else {
-      if (btnDesktop) btnDesktop.classList.remove("hidden");
-      if (btnMobile) btnMobile.classList.remove("hidden");
+      if (userAktif.role === "admin") {
+        if (btnDesktop) btnDesktop.classList.remove("hidden");
+        if (btnMobile) btnMobile.classList.remove("hidden");
+      } else {
+        if (btnDesktop) btnDesktop.classList.add("hidden");
+        if (btnMobile) btnMobile.classList.add("hidden");
+      }
+
+      const logoutHandler = (e) => {
+        e.preventDefault();
+        if (confirm("Apakah Anda yakin ingin keluar?")) {
+          localStorage.removeItem("user_mading");
+          window.location.reload();
+        }
+      };
+
+      if (linkAuthDesktop) {
+        linkAuthDesktop.innerText = `Logout (${userAktif.name || userAktif.username || "User"})`;
+        linkAuthDesktop.href = "#";
+        linkAuthDesktop.addEventListener("click", logoutHandler);
+      }
+      if (linkAuthMobile) {
+        linkAuthMobile.innerText = "Logout";
+        linkAuthMobile.href = "#";
+        linkAuthMobile.addEventListener("click", logoutHandler);
+      }
     }
   };
 
@@ -47,28 +82,31 @@ async function fetchEventsData() {
   const wadahPoster = document.getElementById("tempat-poster");
 
   try {
-    const response = await fetch(API_URL, {
-      method: "GET",
-      headers: {
-        "ngrok-skip-browser-warning": "true",
-        "Content-Type": "application/json",
-      },
-    });
+    const response = typeof fetchAPI === "function"
+      ? await fetchAPI("/api/events")
+      : await fetch(API_URL, {
+          method: "GET",
+          headers: {
+            "ngrok-skip-browser-warning": "true",
+            "Content-Type": "application/json",
+          },
+        });
 
-    if (!response.ok) throw new Error(`Server status: ${response.status}`);
+    if (!response || !response.ok) throw new Error(`Server status: ${response?.status}`);
     const result = await response.json();
 
     allEvents = result.data || [];
-
     applyFiltersAndRender();
   } catch (error) {
     console.error("Gagal konek ke API:", error);
-    wadahPoster.innerHTML = `
-        <div class="col-span-full text-center py-20 text-red-400 bg-red-950/20 border border-red-900 rounded-xl">
-            <p class="font-bold mb-2">Gagal Mengambil Data</p>
-            <p class="text-sm">Pastikan server Laravel dan Ngrok lu lagi nyala bro.</p>
+    if (wadahPoster) {
+      wadahPoster.innerHTML = `
+        <div class="col-span-full text-center py-20 text-red-500 bg-red-50 border border-red-200 rounded-2xl">
+          <p class="font-bold mb-2 text-lg">Gagal Mengambil Data Acara</p>
+          <p class="text-sm text-slate-600">Server backend sedang tidak tersedia.</p>
         </div>
-    `;
+      `;
+    }
   }
 }
 
@@ -186,7 +224,7 @@ document.getElementById("tempat-poster").addEventListener("click", (e) => {
   const diklik = e.target.closest(".card-acara");
   if (diklik) {
     const idAcara = diklik.getAttribute("data-id");
-    window.location.href = `select-event.html?id=${idAcara}`;
+    window.location.href = `event/select-event.html?id=${idAcara}`;
   }
 });
 

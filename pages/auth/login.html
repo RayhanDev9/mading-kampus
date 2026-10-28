@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Mading Kampus</title>
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <link rel="stylesheet" href="../../css/output.css" />
+  </head>
+
+  <body
+    class="bg-[#f5f7fa] text-gray-700 flex items-center justify-center min-h-[90vh] p-4 antialiased"
+  >
+    <div class="flex flex-col items-center w-[90%] sm:max-w-md">
+      <a href="../../index.html" class="inline-block hover:opacity-90 transition">
+        <h1
+          class="text-3xl sm:text-4xl font-semibold text-blue-500 tracking-tight text-center mb-14 drop-shadow-sm"
+        >
+          Mading Kampus
+        </h1>
+      </a>
+
+      <div
+        class="w-full bg-white border border-gray-200 rounded-2xl shadow-xl p-6 sm:p-8 transition duration-300"
+      >
+        <h2
+          class="text-2xl font-semibold text-black mb-6 text-center tracking-wide"
+        >
+          Login Akses
+        </h2>
+
+        <div
+          id="pesan-error"
+          class="hidden bg-red-50 border border-red-200 text-red-700 px-4 py-2.5 rounded-lg mb-4 text-xs sm:text-sm text-center font-medium"
+        ></div>
+
+        <form id="form-login" class="space-y-4">
+          <div>
+            <label
+              class="block text-xs sm:text-sm font-bold text-gray-600 mb-1.5"
+              >Username</label
+            >
+            <div class="relative flex items-center">
+              <div class="absolute left-3 text-gray-400 pointer-events-none">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-5 h-5"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
+                  />
+                </svg>
+              </div>
+              <input
+                type="text"
+                id="username"
+                required
+                class="w-full bg-gray-50 text-gray-900 border border-gray-300 rounded-lg pl-10 pr-4 py-2 sm:py-2.5 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition placeholder-gray-400"
+                placeholder="Masukkan username Anda"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label
+              class="block text-xs sm:text-sm font-bold text-gray-600 mb-1.5"
+              >Password</label
+            >
+            <div class="relative flex items-center">
+              <div class="absolute left-3 text-gray-400 pointer-events-none">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-5 h-5"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"
+                  />
+                </svg>
+              </div>
+
+              <input
+                type="password"
+                id="password"
+                required
+                class="w-full bg-gray-50 text-gray-900 border border-gray-300 rounded-lg pl-10 pr-10 py-2 sm:py-2.5 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition placeholder-gray-400"
+                placeholder="Masukkan sandi Anda"
+              />
+
+              <button
+                type="button"
+                id="eye"
+                class="absolute right-3 text-gray-400 hover:text-gray-600 focus:outline-none"
+              >
+                <svg
+                  id="eyeOpenIcon"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-5 h-5 hidden"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"
+                  />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                  />
+                </svg>
+                <svg
+                  id="eyeCloseIcon"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-5 h-5"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center">
+              <input
+                type="checkbox"
+                name="remember"
+                id="remember"
+                class="w-4 h-4 text-blue-600 bg-gray-50 border-gray-300 rounded focus:ring-blue-500 focus:ring-2 cursor-pointer transition"
+              />
+              <label
+                for="remember"
+                class="ml-2 text-xs sm:text-sm font-medium text-gray-400 cursor-pointer select-none"
+              >
+                Ingat saya
+              </label>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            id="tombol-login"
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 sm:py-2.5 rounded-lg mt-4 text-sm transition duration-200 shadow-md"
+          >
+            Masuk
+          </button>
+        </form>
+
+        <p class="text-center text-xs sm:text-sm text-gray-500 mt-6">
+          Belum punya akun?
+          <a
+            href="register.html"
+            class="text-blue-600 hover:text-blue-700 hover:underline font-medium transition ml-1"
+            >Daftar di sini</a
+          >
+        </p>
+      </div>
+    </div>
+
+    <script src="../../js/api.js"></script>
+    <script src="../../js/login.js"></script>
+  </body>
+</html>

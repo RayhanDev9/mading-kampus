@@ -99,10 +99,10 @@ document.addEventListener("DOMContentLoaded", () => {
   formUnggah.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const userAktif = JSON.parse(localStorage.getItem("user_mading"));
+    const userAktif = JSON.parse(localStorage.getItem("user_mading") || "null");
     if (!userAktif) {
-      alert("Lu harus login dulu buat unggah acara!");
-      window.location.href = "login.html";
+      alert("Anda harus login dulu untuk mengunggah acara!");
+      window.location.href = "../auth/login.html";
       return;
     }
 
@@ -134,22 +134,30 @@ document.addEventListener("DOMContentLoaded", () => {
       formData.append("deskripsi", document.getElementById("deskripsi").value);
 
       const filePoster = document.getElementById("gambar_poster").files[0];
-      formData.append("gambar_poster", filePoster);
+      if (filePoster) {
+        formData.append("gambar_poster", filePoster);
+      }
 
-      const response = await fetch(`${API_BASE_URL}/events`, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "ngrok-skip-browser-warning": "true",
-        },
-        body: formData,
-      });
+      const response = typeof fetchAPI === "function"
+        ? await fetchAPI("/api/events", {
+            method: "POST",
+            body: formData,
+          })
+        : await fetch("https://slab-silenced-riot.ngrok-free.dev/api/events", {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "ngrok-skip-browser-warning": "true",
+            },
+            body: formData,
+          });
 
+      if (!response) return;
       const result = await response.json();
 
       if (response.ok) {
-        alert("Yess! Acara lu berhasil diunggah!");
-        window.location.href = "index.html";
+        alert("Yess! Acara berhasil diunggah!");
+        window.location.href = "../beranda.html";
       } else {
         console.error("Validasi Error:", result);
         alert("Gagal unggah: " + (result.message || "Cek form lu lagi."));

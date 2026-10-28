@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detail Event - Mading Kampus</title>
+    <link rel="stylesheet" href="../../css/output.css" />
+    <style>
+      /* Styling untuk scrollbar agar terlihat lebih rapi */
+      .chat-container::-webkit-scrollbar {
+        width: 6px;
+      }
+      .chat-container::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+      .chat-container::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 10px;
+      }
+      .chat-container::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100 min-h-screen font-sans">
+    <header
+      class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm"
+    >
+      <div class="mx-auto px-4 sm:px-6 md:px-8">
+        <div class="flex items-center justify-between h-16">
+          <div class="flex items-center gap-x-5 lg:gap-x-8">
+            <a
+              href="../../index.html"
+              title="Kembali ke Landing Page"
+              class="text-xl md:text-2xl font-bold text-blue-700 tracking-tight"
+              >MK</a
+            >
+
+            <nav
+              class="hidden md:flex items-center gap-x-6 lg:gap-x-8 text-sm md:text-base"
+            >
+              <a
+                href="../beranda.html"
+                class="text-slate-600 hover:text-slate-900 transition"
+                >Beranda</a
+              >
+              <a
+                href="favorit.html"
+                class="text-slate-600 hover:text-slate-900 transition"
+                >Favorit</a
+              >
+              <a
+                href="../tools/mini-tools.html"
+                class="text-slate-600 hover:text-slate-900 transition"
+                >Mini Tools</a
+              >
+            </nav>
+          </div>
+
+          <div class="hidden md:flex items-center gap-x-5 text-sm">
+            <a href="uploud.html" class="btn-unggah" id="btn-unggah-desktop">
+              <button
+                class="flex items-center gap-x-1.5 px-4 py-1.5 bg-blue-600 text-white rounded-lg font-semibold uppercase hover:bg-blue-700 transition"
+              >
+                <svg
+                  class="w-4 h-4"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5"
+                  />
+                </svg>
+                UNGGAH
+              </button>
+            </a>
+
+            <div class="border-slate-300 pl-5">
+              <a
+                href="../auth/login.html"
+                class="text-red-500 hover:text-red-700 font-medium transition text-base"
+                >Logout</a
+              >
+            </div>
+          </div>
+
+          <!-- Tombol Hamburger (Hanya tampil di Mobile) -->
+          <div class="flex md:hidden items-center couser">
+            <button
+              id="mobile-menu-btn"
+              class="text-slate-600 hover:text-slate-900 focus:outline-none p-2"
+            >
+              <svg
+                class="w-7 h-7"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div
+        id="mobile-menu"
+        class="md:hidden border-t border-slate-200 bg-white px-4 pt-4 pb-6 space-y-4 shadow-lg absolute w-full left-0 z-40 transform transition-all duration-300 ease-out opacity-0 pointer-events-none -translate-y-4"
+      >
+        <nav class="flex flex-col gap-y-4 text-base">
+          <a
+            href="../beranda.html"
+            class="text-slate-600 hover:text-slate-900 transition"
+            >Beranda</a
+          >
+          <a
+            href="favorit.html"
+            class="text-slate-600 hover:text-slate-900 transition"
+            >Favorit</a
+          >
+          <a
+            href="../tools/mini-tools.html"
+            class="text-slate-600 hover:text-slate-900 transition"
+            >Mini Tools</a
+          >
+        </nav>
+        <div class="pt-4 border-slate-100 flex flex-col gap-y-4">
+          <a href="uploud.html" class="btn-unggah" id="btn-unggah-mobile">
+            <button
+              class="flex items-center justify-center gap-x-2 w-full px-6 py-2.5 bg-blue-600 text-white rounded-lg font-semibold uppercase hover:bg-blue-700 transition text-sm"
+            >
+              UNGGAH
+            </button>
+          </a>
+
+          <div class="flex pt-2">
+            <a
+              href="../auth/login.html"
+              class="text-red-500 hover:text-red-700 font-medium transition text-base"
+              >Logout</a
+            >
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="flex flex-col px-4">
+      <div
+        class="py-4 px-4 md:px-10 text-xs md:text-sm text-gray-500 max-w-8xl"
+        id="breadcrumb"
+      >
+        Memuat...
+      </div>
+
+      <div
+        class="max-w-8xl xs:px-4 md:px-10 pb-12 grid grid-cols-1 lg:grid-cols-3 gap-6"
+      >
+        <main
+          class="lg:col-span-2 flex flex-col gap-6"
+          id="container-slect-event"
+        >
+          <div class="flex justify-center items-center h-64">
+            <svg
+              class="animate-spin h-8 w-8 text-blue-600"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                class="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                stroke-width="4"
+              ></circle>
+              <path
+                class="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              ></path>
+            </svg>
+          </div>
+        </main>
+
+        <aside class="lg:col-span-1">
+          <div
+            class="w-full bg-white border border-gray-200 rounded-xl shadow-sm flex flex-col h-[600px] sticky top-6 overflow-hidden"
+          >
+            <div
+              class="px-5 py-4 border-b border-gray-100 flex justify-between items-center bg-white z-10"
+            >
+              <h2
+                class="text-lg font-bold text-gray-800 flex items-center gap-2"
+              >
+                <span class="text-[#c0b4d6] text-2xl">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="w-5 h-5 text-blue-700"
+                  >
+                    <path
+                      d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+                    ></path>
+                  </svg>
+                </span>
+                Tanya Jawab
+              </h2>
+              <span
+                class="bg-blue-100 text-blue-600 text-xs font-bold px-3 py-1.5 rounded uppercase tracking-wide"
+                >Live</span
+              >
+            </div>
+
+            <div
+              id="chat-box"
+              class="chat-container p-5 flex-1 overflow-y-auto flex flex-col gap-5 bg-white"
+            >
+              <div class="text-center text-sm text-gray-400 my-auto">
+                Memuat diskusi dari server...
+              </div>
+            </div>
+
+            <div class="p-4 border-t border-gray-100 bg-white">
+              <form
+                id="chat-form"
+                class="flex items-center border border-gray-300 rounded-md focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500 overflow-hidden bg-gray-50"
+              >
+                <input
+                  type="text"
+                  id="chat-input"
+                  placeholder="Tanya sesuatu..."
+                  class="w-full px-4 py-3 text-sm outline-none bg-transparent"
+                  autocomplete="off"
+                  required
+                />
+                <button
+                  type="submit"
+                  class="bg-blue-600 text-white px-5 py-3 hover:bg-blue-700 transition-colors flex items-center justify-center font-bold"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="w-5 h-5 text-white rotate-45"
+                  >
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                  </svg>
+                </button>
+              </form>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <footer class="mt-20 bg-white border-t border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-8">
+        <div
+          class="flex flex-col md:flex-row justify-between items-center gap-y-6 text-center md:text-left"
+        >
+          <div>
+            <span class="text-2xl font-bold text-blue-700 tracking-tight"
+              >Mading Kampus</span
+            >
+            <p class="text-slate-500 text-sm mt-2">
+              Mading digital untuk berbagi acara & UMKM mahasiswa.
+            </p>
+          </div>
+
+          <nav
+            class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-medium text-slate-600"
+          >
+            <a href="#" class="hover:text-blue-600 transition">Tentang Kami</a>
+            <a href="#" class="hover:text-blue-600 transition"
+              >Hubungi Panitia</a
+            >
+            <a href="#" class="hover:text-blue-600 transition"
+              >Panduan Unggah</a
+            >
+          </nav>
+        </div>
+
+        <hr class="border-slate-200 my-8" />
+
+        <div class="text-center text-sm text-slate-400">
+          &copy; 2026 Mading Kampus. Semua hak cipta dilindungi.
+        </div>
+      </div>
+    </footer>
+
+    <script src="../../js/auth.js"></script>
+    <script src="../../js/api.js"></script>
+    <script type="module" src="../../js/select-event.js"></script>
+  </body>
+</html>

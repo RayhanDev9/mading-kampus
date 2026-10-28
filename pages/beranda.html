@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Beranda - Mading Kampus</title>
+
+    <link rel="stylesheet" href="../css/output.css" />
+  </head>
+  <body class="min-h-screen font-sans bg-[#f5f7fa] text-gray-700">
+    <header
+      class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm"
+    >
+      <div class="mx-auto px-4 sm:px-6 md:px-8">
+        <div class="flex items-center justify-between h-16">
+          <div class="flex items-center gap-x-5 lg:gap-x-8">
+            <a
+              href="../index.html"
+              title="Kembali ke Landing Page"
+              class="text-xl md:text-2xl font-bold text-blue-700 tracking-tight"
+              >MK</a
+            >
+
+            <nav
+              class="hidden md:flex items-center gap-x-6 lg:gap-x-8 text-sm md:text-base"
+            >
+              <a
+                href="beranda.html"
+                class="font-medium text-blue-600 border-b-[3px] border-blue-600 pb-1 mt-1"
+                >Beranda</a
+              >
+              <a
+                href="event/favorit.html"
+                class="text-slate-600 hover:text-slate-900 transition"
+                >Favorit</a
+              >
+              <a
+                href="tools/mini-tools.html"
+                class="text-slate-600 hover:text-slate-900 transition"
+                >Mini Tools</a
+              >
+            </nav>
+          </div>
+
+          <div class="hidden md:flex items-center gap-x-5 text-sm">
+            <div class="relative">
+              <svg
+                class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+                />
+              </svg>
+              <input
+                type="text"
+                placeholder="Cari acara..."
+                class="w-48 lg:w-56 px-3 py-1.5 pl-10 border border-slate-300 rounded-lg placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition"
+              />
+            </div>
+
+            <a href="event/uploud.html" class="btn-unggah" id="btn-unggah-desktop">
+              <button
+                class="flex items-center gap-x-1.5 px-4 py-1.5 bg-blue-600 text-white rounded-lg font-semibold uppercase hover:bg-blue-700 transition"
+              >
+                <svg
+                  class="w-4 h-4"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5"
+                  />
+                </svg>
+                UNGGAH
+              </button>
+            </a>
+
+            <div class="border-slate-300 pl-5" id="auth-nav-desktop">
+              <a
+                href="auth/login.html"
+                id="link-auth-desktop"
+                class="text-red-500 hover:text-red-700 font-medium transition text-base"
+                >Logout</a
+              >
+            </div>
+          </div>
+
+          <div class="flex md:hidden items-center couser">
+            <button
+              id="mobile-menu-btn"
+              class="text-slate-600 hover:text-slate-900 focus:outline-none p-2"
+            >
+              <svg
+                class="w-7 h-7"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div
+        id="mobile-menu"
+        class="md:hidden border-t border-slate-200 bg-white px-4 pt-4 pb-6 space-y-4 shadow-lg absolute w-full left-0 z-40 transform transition-all duration-300 ease-out opacity-0 pointer-events-none -translate-y-4"
+      >
+        <nav class="flex flex-col gap-y-4 text-base">
+          <a href="beranda.html" class="font-medium text-blue-600">Beranda</a>
+          <a
+            href="event/favorit.html"
+            class="text-slate-600 hover:text-slate-900 transition"
+            >Favorit</a
+          >
+          <a
+            href="tools/mini-tools.html"
+            class="text-slate-600 hover:text-slate-900 transition"
+            >Mini Tools</a
+          >
+        </nav>
+        <div class="pt-4 border-t border-slate-100 flex flex-col gap-y-4">
+          <input
+            type="text"
+            placeholder="Cari acara..."
+            class="w-full px-4 py-2 border border-slate-300 rounded-lg placeholder-slate-400 focus:outline-none focus:border-blue-500 transition text-sm"
+          />
+          <a href="event/uploud.html" class="btn-unggah" id="btn-unggah-mobile">
+            <button
+              class="flex items-center justify-center gap-x-2 w-full px-6 py-2.5 bg-blue-600 text-white rounded-lg font-semibold uppercase hover:bg-blue-700 transition text-sm"
+            >
+              UNGGAH
+            </button>
+          </a>
+
+          <div class="flex pt-2" id="auth-nav-mobile">
+            <a
+              href="auth/login.html"
+              id="link-auth-mobile"
+              class="text-red-500 hover:text-red-700 font-medium transition text-base"
+              >Logout</a
+            >
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="mx-auto px-6">
+      <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div class="flex flex-col gap-y-6">
+          <div
+            id="tab-group"
+            class="lg:inline-flex bg-slate-100 p-1 rounded-lg border border-slate-200 lg:self-start flex flex-nowrap overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+          >
+            <button
+              class="px-8 py-2 rounded-md text-sm transition-all duration-200 focus:outline-none bg-white text-blue-700 font-bold shadow-sm border border-slate-200"
+            >
+              Acara
+            </button>
+            <button
+              class="px-8 py-2 rounded-md text-sm transition-all duration-200 focus:outline-none text-slate-500 font-medium border border-transparent hover:text-slate-900 hover:bg-slate-200/50"
+            >
+              UMKM
+            </button>
+            <button
+              class="px-8 py-2 rounded-md text-sm transition-all duration-200 focus:outline-none text-slate-500 font-medium border border-transparent hover:text-slate-900 hover:bg-slate-200/50"
+            >
+              UKO
+            </button>
+            <button
+              class="px-8 py-2 rounded-md text-sm transition-all duration-200 focus:outline-none text-slate-500 font-medium border border-transparent hover:text-slate-900 hover:bg-slate-200/50"
+            >
+              HIMA
+            </button>
+          </div>
+
+          <div class="flex flex-col gap-y-5">
+            <div
+              id="time-group"
+              class="flex items-center gap-3 flex-nowrap overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] pb-2"
+            >
+              <span
+                class="text-xs font-bold text-slate-400 uppercase tracking-wider mr-2"
+                >Waktu</span
+              >
+
+              <button
+                class="whitespace-nowrap px-5 py-2 rounded-full text-sm transition-all duration-200 shadow-sm border bg-blue-50 text-blue-700 border-blue-200 font-semibold hover:bg-blue-100"
+              >
+                Semua Acara
+              </button>
+              <button
+                class="whitespace-nowrap px-5 py-2 rounded-full text-sm transition-all duration-200 shadow-sm border bg-white text-slate-600 border-slate-200 font-medium hover:bg-slate-50 hover:border-slate-300"
+              >
+                Hari Ini
+              </button>
+              <button
+                class="whitespace-nowrap px-5 py-2 rounded-full text-sm transition-all duration-200 shadow-sm border bg-white text-slate-600 border-slate-200 font-medium hover:bg-slate-50 hover:border-slate-300"
+              >
+                Minggu Ini
+              </button>
+              <button
+                class="whitespace-nowrap px-5 py-2 rounded-full text-sm transition-all duration-200 shadow-sm border bg-white text-slate-600 border-slate-200 font-medium hover:bg-slate-50 hover:border-slate-300"
+              >
+                Acara Mendatang
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+     
+      <section
+        id="tempat-poster"
+        class="max-w-7xl mx-auto xs:px-4 sm:px-6 lg:px-8 py-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+      >
+        <div
+          class="col-span-full text-center py-20 text-gray-500 animate-pulse mx-auto"
+        >
+          Menyambungkan ke Server Backend...
+        </div>
+      </section>
+    </main>
+
+    <footer class="mt-20 bg-white border-t border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-8">
+        <div
+          class="flex flex-col md:flex-row justify-between items-center gap-y-6 text-center md:text-left"
+        >
+          <div>
+            <span class="text-2xl font-bold text-blue-700 tracking-tight"
+              >Mading Kampus</span
+            >
+            <p class="text-slate-500 text-sm mt-2">
+              Mading digital untuk berbagi acara & UMKM mahasiswa.
+            </p>
+          </div>
+
+          <nav
+            class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-medium text-slate-600"
+          >
+            <a href="#" class="hover:text-blue-600 transition">Tentang Kami</a>
+            <a href="#" class="hover:text-blue-600 transition"
+              >Hubungi Panitia</a
+            >
+            <a href="#" class="hover:text-blue-600 transition"
+              >Panduan Unggah</a
+            >
+          </nav>
+        </div>
+
+        <hr class="border-slate-200 my-8" />
+
+        <div class="text-center text-sm text-slate-400">
+          &copy; 2026 KampusKonek. Semua hak cipta dilindungi.
+        </div>
+      </div>
+    </footer>
+
+    <script src="../js/api.js"></script>
+    <script type="module" src="../js/home.js"></script>
+  </body>
+</html>

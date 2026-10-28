@@ -1,17 +1,22 @@
 // Pakai link Ngrok yang udah statis
-const API_BASE_URL = "https://slab-silenced-riot.ngrok-free.dev/api";
+const API_REGISTER_URL = typeof API_BASE_URL !== "undefined" ? `${API_BASE_URL}/api` : "https://slab-silenced-riot.ngrok-free.dev/api";
 
 // 1. Fungsi Cek Status Admin (Jalan otomatis saat web dibuka)
 async function cekStatusAdmin() {
   try {
-    const response = await fetch(`${API_BASE_URL}/check-admin`, {
-      headers: { "ngrok-skip-browser-warning": "true" },
-    });
+    const response = typeof fetchAPI === "function"
+      ? await fetchAPI("/api/check-admin")
+      : await fetch(`${API_REGISTER_URL}/check-admin`, {
+          headers: { "ngrok-skip-browser-warning": "true" },
+        });
+    if (!response) return;
     const result = await response.json();
 
     if (result.admin_sudah_ada) {
-      document.getElementById("opsi-admin").remove();
-      document.getElementById("teks-admin-tutup").classList.remove("hidden");
+      const opsiAdmin = document.getElementById("opsi-admin");
+      if (opsiAdmin) opsiAdmin.remove();
+      const teksTutup = document.getElementById("teks-admin-tutup");
+      if (teksTutup) teksTutup.classList.remove("hidden");
     }
   } catch (error) {
     console.error("Gagal ngecek status admin", error);
