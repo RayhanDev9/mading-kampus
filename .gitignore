@@ -1,0 +1,13 @@
+# Dependency folder
+node_modules/
+
+# Build and output
+# dist/
+
+# Operating System files
+.DS_Store
+Thumbs.db
+
+# Editor directories and files
+.vscode/
+*.log
