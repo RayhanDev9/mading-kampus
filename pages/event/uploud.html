@@ -4,9 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Frontend - Mading Kampus</title>
+    <title>Unggah Acara - Mading Kampus</title>
 
-    <link rel="stylesheet" href="css/output.css" />
+    <link rel="stylesheet" href="../../css/output.css" />
   </head>
   <body class="min-h-screen font-sans bg-[#f5f7fa] text-gray-700">
     <header
@@ -16,7 +16,8 @@
         <div class="flex items-center justify-between h-16">
           <div class="flex items-center gap-x-5 lg:gap-x-8">
             <a
-              href="index.html"
+              href="../../index.html"
+              title="Kembali ke Landing Page"
               class="text-xl md:text-2xl font-bold text-blue-700 tracking-tight"
               >MK</a
             >
@@ -25,7 +26,7 @@
               class="hidden md:flex items-center gap-x-6 lg:gap-x-8 text-sm md:text-base"
             >
               <a
-                href="index.html"
+                href="../beranda.html"
                 class="text-slate-600 hover:text-slate-900 transition"
                 >Beranda</a
               >
@@ -35,7 +36,7 @@
                 >Favorit</a
               >
               <a
-                href="mini-tools.html"
+                href="../tools/mini-tools.html"
                 class="text-slate-600 hover:text-slate-900 transition"
                 >Mini Tools</a
               >
@@ -67,7 +68,7 @@
 
             <div class="border-slate-300 pl-5">
               <a
-                href="login.html"
+                href="../auth/login.html"
                 class="text-red-500 hover:text-red-700 font-medium transition text-base"
                 >Logout</a
               >
@@ -103,7 +104,7 @@
         class="md:hidden border-t border-slate-200 bg-white px-4 pt-4 pb-6 space-y-4 shadow-lg absolute w-full left-0 z-40 transform transition-all duration-300 ease-out opacity-0 pointer-events-none -translate-y-4"
       >
         <nav class="flex flex-col gap-y-4 text-base">
-          <a href="index.html" class="text-slate-600 hover:text-slate-900 transition"
+          <a href="../beranda.html" class="text-slate-600 hover:text-slate-900 transition"
             >Beranda</a
           >
           <a
@@ -112,7 +113,7 @@
             >Favorit</a
           >
           <a
-            href="mini-tools.html"
+            href="../tools/mini-tools.html"
             class="text-slate-600 hover:text-slate-900 transition"
             >Mini Tools</a
           >
@@ -128,7 +129,7 @@
 
           <div class="flex pt-2">
             <a
-              href="login.html"
+              href="../auth/login.html"
               class="text-red-500 hover:text-red-700 font-medium transition text-base"
               >Logout</a
             >
@@ -329,6 +330,8 @@
       </div>
     </footer>
 
-    <script type="module" src="js/uploud.js"></script>
+    <script src="../../js/auth.js"></script>
+    <script src="../../js/api.js"></script>
+    <script type="module" src="../../js/uploud.js"></script>
   </body>
 </html>

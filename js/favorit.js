@@ -78,27 +78,29 @@ function renderCards(dataArray) {
 }
 
 const initFavorit = async () => {
-  const userAktif = JSON.parse(localStorage.getItem("user_mading"));
+  const userAktif = JSON.parse(localStorage.getItem("user_mading") || "null");
   
   if (!userAktif) {
       alert("Silakan login terlebih dahulu untuk melihat daftar Favorit Anda.");
-      window.location.href = "login.html";
+      window.location.href = "../auth/login.html";
       return;
   }
 
   async function fetchFavoritUser() {
-    const apiUrl = `${API_BASE_URL}/users/${userAktif.id}/bookmarks`;
+    const apiUrl = `/api/users/${userAktif.id}/bookmarks`;
 
     try {
-      const response = await fetch(apiUrl, {
-        method: "GET",
-        headers: {
-          "ngrok-skip-browser-warning": "true",
-          Accept: "application/json",
-        },
-      });
+      const response = typeof fetchAPI === "function"
+        ? await fetchAPI(apiUrl)
+        : await fetch(`${API_BASE_URL}/users/${userAktif.id}/bookmarks`, {
+            method: "GET",
+            headers: {
+              "ngrok-skip-browser-warning": "true",
+              Accept: "application/json",
+            },
+          });
 
-      if (!response.ok) throw new Error("Gagal mengambil data dari API");
+      if (!response || !response.ok) throw new Error("Gagal mengambil data dari API");
 
       const result = await response.json();
       return result.data !== undefined ? result.data : result;

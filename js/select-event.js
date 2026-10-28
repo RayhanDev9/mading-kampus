@@ -46,7 +46,7 @@ window.toggleBookmarkEvent = async function () {
 
   if (!userAktif) {
     alert("Silakan login terlebih dahulu untuk menyimpan acara.");
-    window.location.href = "login.html";
+    window.location.href = "../auth/login.html";
     return;
   }
 
@@ -275,7 +275,7 @@ const initEventDetail = () => {
   function renderBreadcrumb(data) {
     const container = document.getElementById("breadcrumb");
     container.innerHTML = `
-        <a href="/" class="hover:text-blue-600">Beranda</a> <span class="mx-1">></span> 
+        <a href="../beranda.html" class="hover:text-blue-600">Beranda</a> <span class="mx-1">></span> 
         <span class="hover:text-blue-600 capitalize cursor-pointer">${data.kategori}</span> <span class="mx-1">></span>
         <span class="font-semibold text-gray-800 capitalize">${data.judul}</span>
     `;
@@ -336,7 +336,7 @@ window.submitReply = async function (event, commentId) {
   const userAktif = JSON.parse(localStorage.getItem("user_mading"));
   if (!userAktif) {
     alert("Silakan login terlebih dahulu untuk membalas komentar.");
-    window.location.href = "login.html";
+    window.location.href = "../auth/login.html";
     return;
   }
 
@@ -475,7 +475,7 @@ const initChatSystem = () => {
     const userAktif = JSON.parse(localStorage.getItem("user_mading"));
     if (!userAktif) {
       alert("Silakan login terlebih dahulu untuk berkomentar.");
-      window.location.href = "login.html";
+      window.location.href = "../auth/login.html";
       return;
     }
 

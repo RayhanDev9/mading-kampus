@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Detail Event - Mading Kampus</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../css/output.css" />
     <style>
       /* Styling untuk scrollbar agar terlihat lebih rapi */
       .chat-container::-webkit-scrollbar {
@@ -30,7 +30,8 @@
         <div class="flex items-center justify-between h-16">
           <div class="flex items-center gap-x-5 lg:gap-x-8">
             <a
-              href="index.html"
+              href="../../index.html"
+              title="Kembali ke Landing Page"
               class="text-xl md:text-2xl font-bold text-blue-700 tracking-tight"
               >MK</a
             >
@@ -39,7 +40,7 @@
               class="hidden md:flex items-center gap-x-6 lg:gap-x-8 text-sm md:text-base"
             >
               <a
-                href="index.html"
+                href="../beranda.html"
                 class="text-slate-600 hover:text-slate-900 transition"
                 >Beranda</a
               >
@@ -49,7 +50,7 @@
                 >Favorit</a
               >
               <a
-                href="mini-tools.html"
+                href="../tools/mini-tools.html"
                 class="text-slate-600 hover:text-slate-900 transition"
                 >Mini Tools</a
               >
@@ -81,7 +82,7 @@
 
             <div class="border-slate-300 pl-5">
               <a
-                href="login.html"
+                href="../auth/login.html"
                 class="text-red-500 hover:text-red-700 font-medium transition text-base"
                 >Logout</a
               >
@@ -118,7 +119,7 @@
       >
         <nav class="flex flex-col gap-y-4 text-base">
           <a
-            href="index.html"
+            href="../beranda.html"
             class="text-slate-600 hover:text-slate-900 transition"
             >Beranda</a
           >
@@ -128,7 +129,7 @@
             >Favorit</a
           >
           <a
-            href="mini-tools.html"
+            href="../tools/mini-tools.html"
             class="text-slate-600 hover:text-slate-900 transition"
             >Mini Tools</a
           >
@@ -144,7 +145,7 @@
 
           <div class="flex pt-2">
             <a
-              href="login.html"
+              href="../auth/login.html"
               class="text-red-500 hover:text-red-700 font-medium transition text-base"
               >Logout</a
             >
@@ -308,6 +309,8 @@
       </div>
     </footer>
 
-    <script type="module" src="js/select-event.js"></script>
+    <script src="../../js/auth.js"></script>
+    <script src="../../js/api.js"></script>
+    <script type="module" src="../../js/select-event.js"></script>
   </body>
 </html>

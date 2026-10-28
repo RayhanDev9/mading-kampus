@@ -262,15 +262,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function fetchDetailAcara(id) {
     try {
-      const response = await fetch(`${API_BASE_URL}/${id}`, {
-        method: "GET",
-        headers: {
-          "ngrok-skip-browser-warning": "true",
-          Accept: "application/json",
-        },
-      });
-      if (!response.ok)
-        throw new Error(`HTTP error! status: ${response.status}`);
+      const response = typeof fetchAPI === "function"
+        ? await fetchAPI(`/api/events/${id}`)
+        : await fetch(`https://slab-silenced-riot.ngrok-free.dev/api/events/${id}`, {
+            method: "GET",
+            headers: {
+              "ngrok-skip-browser-warning": "true",
+              Accept: "application/json",
+            },
+          });
+      if (!response || !response.ok)
+        throw new Error(`HTTP error! status: ${response?.status}`);
       const result = await response.json();
       initCheckout(result.data !== undefined ? result.data : result);
     } catch (error) {
